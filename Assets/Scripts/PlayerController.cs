@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float turnSpeed = 45.0f;
     private float horizontalInput;
     private float forwardInput;
+    private bool canMove = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,13 +20,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // this is where we get player input
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
+        if (canMove) {
+            // this is where we get player input
+            horizontalInput = Input.GetAxis("Horizontal");
+            forwardInput = Input.GetAxis("Vertical");
 
-        // moves the vehicle forward based on vertical input
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
-        // rotates car based on horizontal input
-        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+            // moves the vehicle forward based on vertical input
+            transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
+            // rotates car based on horizontal input
+            transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+        }
+    }
+
+    public void StopMovement() {
+        canMove = false;
+    }
+
+    public void ResumeMovement() {
+        canMove = true;
     }
 }
