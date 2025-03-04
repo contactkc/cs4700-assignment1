@@ -14,20 +14,20 @@ public class FinishLine : MonoBehaviour
         textStyle = new GUIStyle();
         textStyle.fontSize = 60;
         textStyle.alignment = TextAnchor.MiddleCenter;
-        textStyle.normal.textColor = Color.white;
+        textStyle.normal.textColor = Color.green;
 
         buttonStyle = new GUIStyle("button");
         buttonStyle.fontSize = 20;
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) // Check if it's the player
+        if (other.CompareTag("Player"))
         {
             guiOn = true;
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
             {
-                player.StopMovement(); // Stop player movement
+                player.StopMovement();
             }
         }
     }
